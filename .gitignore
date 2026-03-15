@@ -1,0 +1,77 @@
+# ─── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+pip-wheel-metadata/
+
+# ─── Testing / Coverage ───────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# ─── Environment / Secrets ────────────────────────────────────────────────────
+# Never commit any real env files; commit only *.example or *.template files
+*.env
+!*.env.example
+!*.env.template
+*.secret
+*.secret.*
+.env.*
+!.env.example
+
+# Specific env dirs (belt-and-suspenders)
+backend/envs/local/
+backend/envs/prod/
+
+# ─── Node / Frontend ──────────────────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+.npm
+.pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Next.js
+.next/
+out/
+frontend/build/
+
+# ─── TypeScript ───────────────────────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ─── Docker / Infra ───────────────────────────────────────────────────────────
+.docker-data/
+
+# ─── IDE / OS ─────────────────────────────────────────────────────────────────
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+Thumbs.db
+
+# ─── Docs (internal, not for repo) ───────────────────────────────────────────
+docs-mvp/
+
+# ─── Misc ─────────────────────────────────────────────────────────────────────
+*.pem
+*.log
+*.pid
