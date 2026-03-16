@@ -3,9 +3,10 @@ import { Header } from "@/components/header/Header";
 import { ToolCardGrid } from "@/components/tool-card";
 import { AuthErrorBanner } from "@/components/auth/AuthErrorBanner";
 import { getTools } from "@/lib/api/tools";
+import { ToolRead } from "@/lib/api/types";
 
 export default async function CatalogPage() {
-  let tools = [];
+  let tools: ToolRead[] = [];
   let fetchError = false;
 
   try {
