@@ -2,7 +2,10 @@
 
 import { useAuth } from "@/components/auth/useAuth";
 import { ToolCard } from "./ToolCard";
-import type { ToolRead } from "@/lib/api/types";
+import type { ToolRead, ToolType } from "@/lib/api/types";
+
+const TOOL_ORDER: ToolType[] = ["research_agent", "code_review", "doc_qa", "resume"];
+const IMPLEMENTED_TOOLS: Set<ToolType> = new Set(["research_agent", "code_review"]);
 
 interface ToolCardGridProps {
   tools: ToolRead[];
@@ -11,8 +14,11 @@ interface ToolCardGridProps {
 export function ToolCardGrid({ tools }: ToolCardGridProps) {
   const { user, credits } = useAuth();
 
-  // Block running tools only if user is logged in AND has confirmed negative balance
   const isBlocked = user !== null && credits !== null && credits < 0;
+
+  const sorted = [...tools].sort(
+    (a, b) => TOOL_ORDER.indexOf(a.tool_type) - TOOL_ORDER.indexOf(b.tool_type),
+  );
 
   return (
     <>
@@ -22,8 +28,13 @@ export function ToolCardGrid({ tools }: ToolCardGridProps) {
         </div>
       )}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {tools.map((tool) => (
-          <ToolCard key={tool.id} tool={tool} disabled={isBlocked} />
+        {sorted.map((tool) => (
+          <ToolCard
+            key={tool.id}
+            tool={tool}
+            disabled={isBlocked}
+            comingSoon={!IMPLEMENTED_TOOLS.has(tool.tool_type)}
+          />
         ))}
       </div>
     </>

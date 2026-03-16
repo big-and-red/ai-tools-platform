@@ -4,13 +4,22 @@ import { Badge } from "@/components/ui/badge";
 import { TOOL_BADGE_COLORS, TOOL_LABELS } from "@/lib/constants";
 import { ToolCardProps } from "./ToolCard.types";
 
-export function ToolCard({ tool, disabled = false }: ToolCardProps) {
+export function ToolCard({ tool, disabled = false, comingSoon = false }: ToolCardProps) {
+  const dimmed = disabled || comingSoon;
+
   return (
     <Card
-      className={`flex flex-col bg-zinc-900 border-zinc-800 transition-colors duration-200 ${
-        disabled ? "opacity-50" : "hover:border-violet-500/50"
+      className={`relative flex flex-col bg-zinc-900 border-zinc-800 transition-colors duration-200 ${
+        dimmed ? "opacity-50 grayscale-[30%]" : "hover:border-violet-500/50"
       }`}
     >
+      {comingSoon && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center rounded-xl">
+          <span className="rounded-full border border-zinc-600 bg-zinc-900/90 px-4 py-1.5 text-xs font-medium tracking-wide text-zinc-300 uppercase">
+            Coming Soon
+          </span>
+        </div>
+      )}
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <Badge
@@ -31,9 +40,9 @@ export function ToolCard({ tool, disabled = false }: ToolCardProps) {
       </CardContent>
 
       <CardFooter>
-        {disabled ? (
+        {dimmed ? (
           <span className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-500">
-            No credits
+            {comingSoon ? "Coming Soon" : "No credits"}
           </span>
         ) : (
           <Link

@@ -227,7 +227,7 @@ async def _run(job_id: str, code: str, language: str, user_id: str) -> None:
 
     finally:
         if langfuse:
-            langfuse.flush()
+            langfuse.shutdown()
         await redis.aclose()
         await engine.dispose()
 
