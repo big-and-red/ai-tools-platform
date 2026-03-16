@@ -55,7 +55,7 @@ export function CodeReviewRunner({ toolId, creditCost }: { toolId: string; credi
   useEffect(() => {
     const reviewEvent = state.events.find((e) => e.type === "review");
     if (reviewEvent && "data" in reviewEvent) {
-      setReview(reviewEvent.data as ReviewData);
+      setReview(reviewEvent.data as unknown as ReviewData);
     }
   }, [state.events]);
 
