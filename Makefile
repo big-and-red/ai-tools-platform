@@ -1,7 +1,7 @@
 STAND ?= local
 
 DEV  := docker compose -f infra/docker-compose.yml -f infra/docker-compose.dev.yml
-PROD := docker compose -f infra/docker-compose.prod.yml
+PROD := docker compose -f infra/docker-compose.prod.yml --env-file .env
 
 .PHONY: up down restart rebuild-frontend rebuild-backend migrate migrate-create seed test lint backend-dev \
         prod-up prod-down prod-restart prod-rebuild-backend prod-rebuild-frontend prod-logs prod-ps \
